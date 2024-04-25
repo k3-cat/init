@@ -1,0 +1,39 @@
+services:
+  hbbs:
+    container_name: hbbs
+    image: rustdesk/rustdesk-server:latest
+    command: hbbs
+    volumes:
+      - /etc/rustdesk/data:/root
+    network_mode: host
+    environment:
+      - "ENCRYPTED_ONLY=1"
+    depends_on:
+      - hbbr
+    restart: unless-stopped
+
+
+  hbbr:
+    container_name: hbbr
+    image: rustdesk/rustdesk-server:latest
+    command: hbbr
+    volumes:
+      - /etc/rustdesk/data:/root
+    network_mode: host
+    restart: unless-stopped
+
+
+  rustdesk-api:
+    container_name: rustdesk-api
+    image: ghcr.io/kingmo888/rustdesk-api-server:latest
+    environment:
+      - CSRF_TRUSTED_ORIGINS="{server}"
+      - ID_SERVER=rustdesk.k3-cat.com
+      - TZ=UTC
+      - LANGUAGE_CODE=en
+    volumes:
+      - /etc/rustdesk/api:/rustdesk-api-server/db
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: host
+    restart: unless-stopped

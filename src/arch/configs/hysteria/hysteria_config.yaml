@@ -1,0 +1,22 @@
+# !/var/lib/hysteria/
+
+listen: :{port}
+
+tls:
+  cert: {cert_path}
+  key: {key_path}
+
+speedTest: true
+
+masquerade:
+  type: proxy
+  listenHTTPS: localhost:{masquerade_port}
+  proxy:
+    url: https://quic.nginx.org/
+    rewriteHost: true
+
+
+auth:
+  type: userpass
+  userpass:
+    bluering: fB7flVHnR5a2qcBh4Wsd7Ebp2FfrHv

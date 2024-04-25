@@ -1,0 +1,46 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "default-dns",
+        "address": "udp://1.1.1.1"
+      }
+    ],
+    "strategy": "prefer_ipv6"
+  },
+  "inbounds": [
+    {
+      "type": "trojan",
+      "tag": "trojan-in",
+      "listen": "::1",
+      "listen_port": {listen_port},
+      "users": [
+
+      ],
+      "tls": {
+        "enabled": false,
+        "certificate_path": "{cert_path}",
+        "key_path": "{key_path}"
+      },
+      "multiplex": {
+        "enabled": true
+      },
+      "transport": {
+        "type": "ws",
+        "path": "{ws_path}"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "direct",
+      "tag": "direct-out"
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true
+  }
+}
