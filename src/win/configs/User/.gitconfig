@@ -1,0 +1,13 @@
+[user]
+	name = {{name}}
+	email = {{email}}
+	signingkey = {{key}}!
+[core]
+	autocrlf = input
+	editor = \"{vs_code_path}" --wait
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[gpg]
+	program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
